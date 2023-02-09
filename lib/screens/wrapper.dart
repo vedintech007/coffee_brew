@@ -8,6 +8,10 @@ class Wrapper extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // return either home or authentice widget
-    return Scaffold();
+    return StreamBuilder<Object>(
+        stream: null,
+        builder: (context, snapshot) {
+          return Authenticate();
+        });
   }
 }
