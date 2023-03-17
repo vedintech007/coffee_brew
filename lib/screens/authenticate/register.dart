@@ -1,17 +1,17 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:ninja_brew_crew/services/auth.dart';
 import 'package:ninja_brew_crew/widgets/custom_buttons.dart';
 
-class SignIn extends StatefulWidget {
-  const SignIn({super.key});
+class Register extends StatefulWidget {
+  const Register({super.key});
 
   @override
-  State<SignIn> createState() => _SignInState();
+  State<Register> createState() => _RegisterState();
 }
 
-class _SignInState extends State<SignIn> {
+class _RegisterState extends State<Register> {
   final AuthService _authService = AuthService();
+
   String email = '';
   String password = '';
 
@@ -20,7 +20,7 @@ class _SignInState extends State<SignIn> {
     return Scaffold(
       backgroundColor: Colors.amber,
       appBar: AppBar(
-        title: const Text("Sign in to Brew Crew"),
+        title: const Text("Sign up to Brew Crew"),
       ),
       body: Container(
           padding: const EdgeInsets.symmetric(
@@ -50,7 +50,7 @@ class _SignInState extends State<SignIn> {
                 ),
                 const SizedBox(height: 20),
                 CustomButton(
-                  btnText: "Sign In",
+                  btnText: "Sign Up",
                   btnTextStyle: const TextStyle(
                     color: Colors.white,
                     fontSize: 20,

@@ -1,5 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import "package:firebase_core/firebase_core.dart";
+import 'package:flutter/foundation.dart';
 import 'package:ninja_brew_crew/models/user.dart';
 
 class AuthService {
@@ -21,7 +21,9 @@ class AuthService {
 
       return _userFromFirebaseUser(user!);
     } catch (e) {
-      print(e.toString());
+      if (kDebugMode) {
+        print("Sign in anon error => $e");
+      }
       return null;
     }
   }
@@ -31,4 +33,15 @@ class AuthService {
   // register with email and password
 
   // sign out
+  Future signOut() async {
+    try {
+      print("signed out");
+      return await _auth.signOut();
+    } catch (e) {
+      if (kDebugMode) {
+        print("Sign out error => $e");
+      }
+      return null;
+    }
+  }
 }
