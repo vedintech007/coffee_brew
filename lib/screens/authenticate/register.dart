@@ -3,7 +3,9 @@ import 'package:ninja_brew_crew/services/auth.dart';
 import 'package:ninja_brew_crew/widgets/custom_buttons.dart';
 
 class Register extends StatefulWidget {
-  const Register({super.key});
+  const Register({super.key, this.toggleView});
+
+  final Function? toggleView;
 
   @override
   State<Register> createState() => _RegisterState();
@@ -11,9 +13,11 @@ class Register extends StatefulWidget {
 
 class _RegisterState extends State<Register> {
   final AuthService _authService = AuthService();
+  final _formKey = GlobalKey<FormState>();
 
   String email = '';
   String password = '';
+  String error = '';
 
   @override
   Widget build(BuildContext context) {
@@ -21,6 +25,26 @@ class _RegisterState extends State<Register> {
       backgroundColor: Colors.amber,
       appBar: AppBar(
         title: const Text("Sign up to Brew Crew"),
+        centerTitle: false,
+        actions: [
+          TextButton(
+            onPressed: () async {
+              widget.toggleView!();
+            },
+            child: Row(
+              children: const [
+                Icon(Icons.person, color: Colors.black),
+                SizedBox(
+                  width: 3,
+                ),
+                Text(
+                  "Sign In",
+                  style: TextStyle(color: Colors.black),
+                ),
+              ],
+            ),
+          ),
+        ],
       ),
       body: Container(
           padding: const EdgeInsets.symmetric(
@@ -28,6 +52,8 @@ class _RegisterState extends State<Register> {
             horizontal: 50.0,
           ),
           child: Form(
+            key: _formKey,
+            autovalidateMode: AutovalidateMode.onUserInteraction,
             child: Column(
               children: <Widget>[
                 const SizedBox(height: 20),
@@ -37,6 +63,7 @@ class _RegisterState extends State<Register> {
                       email = value;
                     });
                   },
+                  validator: (email) => email!.isEmpty ? "Enter a valid email" : null,
                 ),
                 const SizedBox(height: 20),
                 TextFormField(
@@ -47,6 +74,7 @@ class _RegisterState extends State<Register> {
                       password = value;
                     });
                   },
+                  validator: (password) => password!.length < 6 ? "Enter a password 6+ chars long" : null,
                 ),
                 const SizedBox(height: 20),
                 CustomButton(
@@ -57,35 +85,25 @@ class _RegisterState extends State<Register> {
                     fontWeight: FontWeight.bold,
                   ),
                   onBtnPress: () async {
-                    // var response = await _authService.signInAnon();
-                    print(email);
-                    print(password);
+                    if (_formKey.currentState!.validate()) {
+                      print(email);
+                      print(password);
+                      dynamic result = await _authService.registerWithEmailAndPassword(email, password);
 
-                    // if (kDebugMode) {
-                    //   if (response == null) {
-                    //     print("Error signing in anon");
-                    //   } else {
-                    //     print("Successfully signed in");
-                    //     print(response.uid);
-                    //   }
-                    // }
+                      if (result == null) {
+                        setState(() => error = 'Please enter a valid email');
+                      }
+                    }
                   },
                 ),
-                // CustomButton(
-                //   btnText: "Sign in anon",
-                //   onBtnPress: () async {
-                //     var response = await _authService.signInAnon();
-
-                //     if (kDebugMode) {
-                //       if (response == null) {
-                //         print("Error signing in anon");
-                //       } else {
-                //         print("Successfully signed in");
-                //         print(response.uid);
-                //       }
-                //     }
-                //   },
-                // ),
+                const SizedBox(height: 12),
+                Text(
+                  error,
+                  style: const TextStyle(
+                    color: Colors.red,
+                    fontSize: 14,
+                  ),
+                ),
               ],
             ),
           )),

@@ -1,10 +1,13 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:ninja_brew_crew/screens/authenticate/register.dart';
 import 'package:ninja_brew_crew/services/auth.dart';
 import 'package:ninja_brew_crew/widgets/custom_buttons.dart';
 
 class SignIn extends StatefulWidget {
-  const SignIn({super.key});
+  const SignIn({super.key, this.toggleView});
+
+  final Function? toggleView;
 
   @override
   State<SignIn> createState() => _SignInState();
@@ -21,6 +24,26 @@ class _SignInState extends State<SignIn> {
       backgroundColor: Colors.amber,
       appBar: AppBar(
         title: const Text("Sign in to Brew Crew"),
+        centerTitle: false,
+        actions: [
+          TextButton(
+            onPressed: () {
+              widget.toggleView!();
+            },
+            child: Row(
+              children: const [
+                Icon(Icons.person, color: Colors.black),
+                SizedBox(
+                  width: 3,
+                ),
+                Text(
+                  "Register",
+                  style: TextStyle(color: Colors.black),
+                ),
+              ],
+            ),
+          ),
+        ],
       ),
       body: Container(
           padding: const EdgeInsets.symmetric(
