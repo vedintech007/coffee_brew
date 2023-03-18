@@ -1,17 +1,18 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
+
 import 'package:ninja_brew_crew/models/user.dart';
 
 class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
   // create a user obj based on firebase user
-  UserModel _userFromFirebaseUser(User? user) {
-    return UserModel(uid: user!.uid);
+  UserModel? _userFromFirebaseUser(User? user) {
+    return user != null ? UserModel(uid: user.uid) : null;
   }
 
   // auth change user stream
-  Stream<UserModel> get user => _auth.authStateChanges().map(_userFromFirebaseUser);
+  Stream<UserModel?> get user => _auth.authStateChanges().map(_userFromFirebaseUser);
 
   // sign in anonymously
   Future signInAnon() async {
