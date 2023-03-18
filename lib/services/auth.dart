@@ -74,7 +74,6 @@ class AuthService {
   // sign out
   Future signOut() async {
     try {
-      print("signed out");
       return await _auth.signOut();
     } catch (e) {
       if (kDebugMode) {

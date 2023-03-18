@@ -1,7 +1,5 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:ninja_brew_crew/shared/constants.dart';
-import 'package:ninja_brew_crew/screens/authenticate/register.dart';
 import 'package:ninja_brew_crew/services/auth.dart';
 import 'package:ninja_brew_crew/shared/custom_button.dart';
 import 'package:ninja_brew_crew/widgets/custom_buttons.dart';
