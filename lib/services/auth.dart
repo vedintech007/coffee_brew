@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 
 import 'package:ninja_brew_crew/models/user.dart';
+import 'package:ninja_brew_crew/services/database.dart';
 
 class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -57,6 +58,9 @@ class AuthService {
       );
 
       final user = result.user;
+
+      // create a new document for the user with the uid
+      await DatabaseService(uid: user!.uid).updateUserData("0", "Victor Maui", 2);
 
       return _userFromFirebaseUser(user);
     } catch (e) {

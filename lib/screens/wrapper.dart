@@ -12,10 +12,11 @@ class Wrapper extends StatelessWidget {
     final user = Provider.of<UserModel?>(context);
 
     // return either home or authenticate widget
-    print("wrapper user is $user");
+
     if (user == null) {
       return const Authenticate();
     } else {
+      print("wrapper user is ${user.uid}");
       return Home();
     }
   }
