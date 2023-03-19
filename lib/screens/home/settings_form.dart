@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:ninja_brew_crew/models/user.dart';
-import 'package:ninja_brew_crew/services/auth.dart';
 import 'package:ninja_brew_crew/services/database.dart';
 import 'package:ninja_brew_crew/shared/constants.dart';
 import 'package:ninja_brew_crew/shared/custom_button.dart';
@@ -94,6 +93,9 @@ class _SettingsFormState extends State<SettingsForm> {
                                 _currentName ?? userData!.name!,
                                 _currentStrength ?? userData!.strength!,
                               );
+
+                              // ignore: use_build_context_synchronously
+                              Navigator.of(context).pop();
                             }
                           },
                         ),

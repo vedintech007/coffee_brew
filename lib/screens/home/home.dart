@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:ninja_brew_crew/models/brew.dart';
-import 'package:ninja_brew_crew/screens/authenticate/sign_in.dart';
 import 'package:ninja_brew_crew/screens/home/brew_list.dart';
 import 'package:ninja_brew_crew/screens/home/settings_form.dart';
 import 'package:ninja_brew_crew/services/auth.dart';
@@ -17,7 +16,7 @@ class Home extends StatelessWidget {
       context: context,
       builder: (context) {
         return Container(
-          padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 60),
+          padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 30),
           child: const SettingsForm(),
         );
       },
@@ -30,7 +29,7 @@ class Home extends StatelessWidget {
       initialData: null,
       create: (context) => DatabaseService().brews,
       child: Scaffold(
-        backgroundColor: Colors.amber,
+        backgroundColor: Colors.black,
         appBar: AppBar(
           title: const Text("Brew Crew Home Page"),
           centerTitle: false,
@@ -69,9 +68,15 @@ class Home extends StatelessWidget {
             ),
           ],
         ),
-        body: const SafeArea(
-          child: Center(
-            child: BrewList(),
+        body: SafeArea(
+          child: Container(
+            decoration: const BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage("assets/coffee_bg.png"),
+                fit: BoxFit.cover,
+              ),
+            ),
+            child: const BrewList(),
           ),
         ),
       ),
