@@ -1,10 +1,10 @@
 class Brew {
   Brew({
-    required this.name,
-    required this.sugars,
-    required this.strength,
+    this.name,
+    this.sugars,
+    this.strength,
   });
 
-  final String name, sugars;
-  final int strength;
+  final String? name, sugars;
+  final int? strength;
 }

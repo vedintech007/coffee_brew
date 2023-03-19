@@ -11,12 +11,14 @@ class CustomTextFormField extends StatelessWidget {
     this.obscuringCharacter,
     this.obscureText,
     this.controller,
+    this.initialValue,
   });
   final Function(String)? onChanged;
   final String? hintText;
   final String? label;
   final String? Function(String?)? validator;
   final String? obscuringCharacter;
+  final String? initialValue;
   final bool? obscureText;
   final TextEditingController? controller;
 
@@ -28,6 +30,7 @@ class CustomTextFormField extends StatelessWidget {
       validator: validator,
       obscuringCharacter: obscuringCharacter ?? "*",
       obscureText: obscureText ?? false,
+      initialValue: initialValue,
       decoration: InputDecoration(
         hintText: hintText,
         label: Text(label ?? ""),

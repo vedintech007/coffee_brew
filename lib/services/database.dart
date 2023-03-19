@@ -1,5 +1,6 @@
 import "package:cloud_firestore/cloud_firestore.dart";
 import "package:ninja_brew_crew/models/brew.dart";
+import "package:ninja_brew_crew/models/user.dart";
 
 class DatabaseService {
   DatabaseService({this.uid});
@@ -36,13 +37,23 @@ class DatabaseService {
         .toList();
   }
 
+  // user data from snapshot
+  UserData _userDataFromSnapShot(DocumentSnapshot snapshot) {
+    return UserData(
+      uid: uid,
+      name: (snapshot.data() as Map<String, dynamic>)['name'],
+      sugars: (snapshot.data() as Map<String, dynamic>)['sugars'],
+      strength: (snapshot.data() as Map<String, dynamic>)['strength'],
+    );
+  }
+
   // get brew stream
   Stream<List<Brew>> get brews {
     return brewCollection.snapshots().map(_brewListFromSnapshot);
   }
 
   // get user docs stream
-  Stream<DocumentSnapshot> get userData {
-    return brewCollection.doc(uid).snapshots();
+  Stream<UserData> get userData {
+    return brewCollection.doc(uid).snapshots().map(_userDataFromSnapShot);
   }
 }
