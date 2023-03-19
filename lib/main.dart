@@ -4,6 +4,7 @@ import 'package:ninja_brew_crew/firebase_options.dart';
 import 'package:ninja_brew_crew/models/user.dart';
 import 'package:ninja_brew_crew/screens/wrapper.dart';
 import 'package:ninja_brew_crew/services/auth.dart';
+import 'package:ninja_brew_crew/shared/hide_keyboard.dart';
 import 'package:provider/provider.dart';
 
 void main() async {
@@ -22,15 +23,17 @@ class MyApp extends StatelessWidget {
     return StreamProvider<UserModel?>.value(
       value: AuthService().user,
       initialData: null,
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData(
-          appBarTheme: AppBarTheme(
-            elevation: 0.0,
-            backgroundColor: Colors.amber[900],
+      child: DismissKeyboard(
+        child: MaterialApp(
+          debugShowCheckedModeBanner: false,
+          theme: ThemeData(
+            appBarTheme: AppBarTheme(
+              elevation: 0.0,
+              backgroundColor: Colors.amber[900],
+            ),
           ),
+          home: const Wrapper(),
         ),
-        home: const Wrapper(),
       ),
     );
   }

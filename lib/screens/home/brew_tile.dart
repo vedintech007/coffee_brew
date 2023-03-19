@@ -9,11 +9,11 @@ class BrewTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(
+      padding: const EdgeInsets.only(
         top: 8.0,
       ),
       child: Card(
-        margin: EdgeInsets.fromLTRB(20, 6, 20, 0),
+        margin: const EdgeInsets.fromLTRB(20, 6, 20, 0),
         child: ListTile(
           leading: CircleAvatar(
             radius: 25,
